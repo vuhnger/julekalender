@@ -28,17 +28,27 @@
   padding: 16px 14px;
   border-radius: 16px;
   border: 2px solid rgba(255, 255, 255, 0.2);
-  background: linear-gradient(145deg, rgba(248, 221, 176, 0.22), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(145deg, rgba(248, 221, 176, 0.2), rgba(255, 255, 255, 0.08));
   color: #fffaf0;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
   text-align: center;
   cursor: pointer;
+  overflow: hidden;
   transition: transform 120ms ease, box-shadow 160ms ease, border-color 120ms ease,
     background 160ms ease;
 }
 
+.door::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.12), transparent 32%);
+  pointer-events: none;
+}
+
 .door--unlocked {
-  background: linear-gradient(160deg, #c12d3a, #d8652f);
+  background: linear-gradient(160deg, #0e6a42, #c12d3a);
   border-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -51,9 +61,9 @@
 
 .door--locked {
   cursor: not-allowed;
-  opacity: 0.8;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
-  color: rgba(255, 255, 255, 0.85);
+  opacity: 0.85;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .door:disabled {
@@ -73,6 +83,14 @@
   margin-top: 8px;
   font-size: 0.95rem;
   opacity: 0.9;
+}
+
+.door-icon {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .lock-icon {

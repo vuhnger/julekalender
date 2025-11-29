@@ -25,7 +25,7 @@ function App() {
 
   const closePanel = () => setActiveDoor(null)
 
-  const formattedToday = today.toLocaleDateString(undefined, {
+  const formattedToday = today.toLocaleDateString('nb-NO', {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
@@ -35,27 +35,30 @@ function App() {
   const decemberBegins = getDoorDate(1)
   const helperCopy =
     today < decemberBegins
-      ? 'Countdown is on—doors open daily in December 2025.'
-      : 'Tap any unlocked door to reveal its surprise.'
+      ? 'Nedtellingen er i gang—lukene åpner daglig i desember 2025.'
+      : 'Trykk på en ulåst luke for å se hva som venter.'
 
   const getDoorContent = (dayNumber) => ({
-    title: `Day ${dayNumber}`,
-    body: 'Content for this day will go here ✨',
+    title: `Dag ${dayNumber}`,
+    body: 'Innhold for denne dagen kommer her ✨',
   })
 
   const openDoorContent = activeDoor ? getDoorContent(activeDoor) : null
 
   return (
     <div className="app-shell">
+      <div className="snow snow--front" aria-hidden="true"></div>
+      <div className="snow snow--back" aria-hidden="true"></div>
+
       <header className="hero">
         <p className="eyebrow">Julekalender 2025</p>
-        <h1>24 cozy moments, one each December day</h1>
+        <h1>24 koselige stunder, én for hver desemberdag</h1>
         <p className="lede">
-          A warm little calendar just for us. Each door opens on its day in December
+          En varm liten kalender bare for oss. Hver luke åpnes på sin dag i desember
           2025.
         </p>
         <div className="status-row" aria-live="polite">
-          <span className="date-chip">Today: {formattedToday}</span>
+          <span className="date-chip">I dag: {formattedToday}</span>
           <span className="helper">{helperCopy}</span>
         </div>
       </header>
@@ -72,14 +75,14 @@ function App() {
             className="door-dialog"
             role="dialog"
             aria-modal="true"
-            aria-label={`Content for day ${activeDoor}`}
+            aria-label={`Innhold for dag ${activeDoor}`}
             onClick={(event) => event.stopPropagation()}
           >
-            <p className="eyebrow">Day {activeDoor}</p>
+            <p className="eyebrow">Dag {activeDoor}</p>
             <h2>{openDoorContent.title}</h2>
             <p className="dialog-body">{openDoorContent.body}</p>
             <button type="button" className="close-button" onClick={closePanel}>
-              Close
+              Lukk
             </button>
           </div>
         </div>
