@@ -1,16 +1,42 @@
-# React + Vite
+# Julekalender 2025 (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Digital adventskalender bygget med React/Vite for statisk deploy (GitHub Pages).
 
-Currently, two official plugins are available:
+## Kjøre lokalt
+```bash
+npm install
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Bygg og deploy
+```bash
+npm run build   # kjører lint + vite build
+npm run deploy  # pusher dist/ til gh-pages (static)
+```
 
-## React Compiler
+## Innhold
+- `src/content.json`: luker 1–24. Hver post har minimum `type` og valgfritt `title` + data. Komponentene har egne fallbacks, så manglende felter krasjer ikke.
+- `src/content.example.json`: viser eksempler på alle støttede typer.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Støttede `type`-verdier:
+- `text` (body)
+- `code` (starter)
+- `wordle` (seed)
+- `sudoku` (puzzle)
+- `video` (url)
+- `redirect` (url)
+- `recipe` (ingredients, steps, body)
+- `spot-diff` (differences)
+- `gift-wrap` (options, correct, body)
+- `rhyme` (body, word)
+- `quiz` (questions: [{question, options, correct}])
 
-## Expanding the ESLint configuration
+## Komponenter
+- `ContentRenderer` er en tynn dispatcher som velger riktig komponent basert på `type`.
+- Fallback-tekster/regler ligger i komponentene og i `content/utils`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Lint
+```bash
+npm run lint
+```
+Kjøres automatisk som del av `npm run build`.

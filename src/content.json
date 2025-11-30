@@ -8,7 +8,7 @@
   "3": { "type": "sudoku", "title": "Sudoku", "puzzle": "" },
   "4": {
     "type": "code",
-    "title": "Kode-matte",
+    "title": "En kodenøtt til A. Hva skriver den ut?",
     "starter": "const mask = BigInt('0x' + 'ff'.repeat(8));\nconst a = 123456789n * 987654321n;\nconst b = (a ^ mask) >> 8n;\nconst c = (b * 1337n) & mask;\nconst heart = String.fromCharCode(Number(0x3c)) + '3';\nconsole.log(heart);\nreturn heart;"
   },
   "5": { "type": "text", "title": "5. desember", "body": "Ingen algoritmer til deg i dag, lykke til på eksamen <3" },
@@ -34,7 +34,7 @@
   },
   "10": {
     "type": "quiz",
-    "title": "Julequiz",
+    "title": "Historie-quiz: Temaet er A og V.",
     "questions": [
       {
         "question": "Hva skjedde 29. september 2024?",
@@ -49,7 +49,7 @@
     ]
   },
   "11": { "type": "text", "title": "Julehilsen", "body": "God førjulskveld ;) du er min snack." },
-  "12": { "type": "wordle", "title": "Wordle-mini", "seed": "GYMP" },
+  "18": { "type": "wordle", "title": "Wordle-mini", "seed": "GYMP" },
   "13": {
     "type": "recipe",
     "title": "Kokoskuler",
@@ -57,7 +57,7 @@
     "ingredients": ["2 dl havregryn", "1 dl kokos", "0.5 dl sukker", "2 ss kakao", "2 ss kaffe"],
     "steps": ["Bland alt tørt.", "Rør inn kaffe til deigen kan trilles.", "Trill kuler og vend i kokos."]
   },
-  "14": { "type": "rhyme", "title": "Rim for deg", "body": "Skriv et ord – få et lite rim tilbake." },
+  "14": { "type": "rhyme", "title": "Rim for deg", "body": "Skriv et ord og få et lite rim tilbake." },
   "15": {
     "type": "quiz",
     "title": "Film eller sang?",
@@ -66,13 +66,13 @@
       { "question": "“Home Alone” er …", "options": ["En film", "En bok", "En konfekt"], "correct": 0 }
     ]
   },
-  "16": { "type": "gift-wrap", "title": "Gavebånd", "body": "Hvilket bånd passer?", "options": ["Gullbånd", "Rødt silkebånd", "Natursnor"], "correct": 1 },
+  "16": { "type": "text", "title": "Eksamensdag!", "body": "Lykke til med hackingen i dag ;))" },
   "17": { "type": "spot-diff", "title": "Mini-forskjell", "differences": ["Pepperkake-mann snudd", "Lys mangler", "Hjerte flyttet"] },
-  "18": { "type": "text", "title": "Koselig hilsen", "body": "Tenk at vi snart feirer jul sammen – jeg gleder meg til kakao og filmkveld." },
-  "19": { "type": "code", "title": "Kodeluke mini", "starter": "console.log('Nissen kom forbi 🎅');" },
+  "12": { "type": "text", "title": "En liten julehilsen", "body": "I dag skal du bli SQL-proff, masse lykke til på eksamen. <3" },
+  "19": { "type": "code", "title": "Kodeluke mini", "starter": "return Boolean('A' + 'V')" },
   "20": { "type": "wordle", "title": "Wordle-mini", "seed": "LYS" },
-  "21": { "type": "recipe", "title": "Gløggkoppen", "body": "Varm eplejuice med kanel og nellik. Server med rosiner og mandler." },
-  "22": { "type": "rhyme", "title": "Rim igjen", "body": "Et lite rim for kvelden." },
-  "23": { "type": "quiz", "title": "Juleblanding", "questions": [{ "question": "Hvem eier Rudolf?", "options": ["Nissen", "Grinchen", "Frosty"], "correct": 0 }] },
-  "24": { "type": "text", "title": "Julaften", "body": "Endelig her. God jul, vi klarte det! ❤️" }
+  "21": { "type": "recipe", "title": "Gløggkoppen", "body": "Varm eplejuice med kanel og nellik. Server med rosiner og mandler. Kan vi lage?" },
+  "22": { "type": "wordle", "title": "Wordle-mini", "seed": "GRØT" },
+  "23": { "type": "sudoku", "title": "Sudoku", "puzzle": "" },
+  "24": { "type": "text", "title": "Julaften", "body": "Endelig her. God jul. ❤️" }
 }
