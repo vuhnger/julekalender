@@ -1,27 +1,15 @@
 import './AdventCalendar.css'
 
 const doorNumbers = Array.from({ length: 24 }, (_, index) => index + 1)
-const decorations = [
-  '🦌',
-  '🎅',
-  '🌲',
-  '🧝',
-  '🦊',
-  '🐻',
-  '🐧',
-  '🎄',
-  '🕯️',
-  '🎁',
-  '🦉',
-  '❄️',
-]
+const decorations = ['🦌', '🎅', '🌲', '🧝', '🦊', '🐻', '🐧', '🎄', '🕯️', '🎁', '🦉', '❄️']
 
-function AdventCalendar({ isDoorUnlocked, onDoorSelect, getDoorDate }) {
+function AdventCalendar({ isDoorUnlocked, isDoorOpened, onDoorSelect, getDoorDate }) {
   return (
     <section className="calendar" aria-label="Adventskalender for desember 2025">
       <div className="calendar-grid">
         {doorNumbers.map((day) => {
           const unlocked = isDoorUnlocked(day)
+          const opened = isDoorOpened(day)
           const unlockDate = getDoorDate(day)
           const unlockLabel = unlockDate.toLocaleDateString('nb-NO', {
             month: 'long',
@@ -35,6 +23,7 @@ function AdventCalendar({ isDoorUnlocked, onDoorSelect, getDoorDate }) {
               key={day}
               dayNumber={day}
               unlocked={unlocked}
+              opened={opened}
               unlockLabel={unlockLabel}
               onOpen={onDoorSelect}
               icon={icon}
@@ -46,15 +35,17 @@ function AdventCalendar({ isDoorUnlocked, onDoorSelect, getDoorDate }) {
   )
 }
 
-function Door({ dayNumber, unlocked, onOpen, unlockLabel, icon }) {
+function Door({ dayNumber, unlocked, opened, onOpen, unlockLabel, icon }) {
   const label = unlocked
-    ? `Åpne luke ${dayNumber}`
+    ? opened
+      ? `Luke ${dayNumber} er åpnet. Trykk for å se igjen.`
+      : `Åpne luke ${dayNumber}`
     : `Luke ${dayNumber} er låst til ${unlockLabel}`
 
   return (
     <button
       type="button"
-      className={`door ${unlocked ? 'door--unlocked' : 'door--locked'}`}
+      className={`door ${unlocked ? 'door--unlocked' : 'door--locked'} ${opened ? 'door--opened' : ''}`}
       onClick={() => unlocked && onOpen(dayNumber)}
       disabled={!unlocked}
       aria-label={label}
@@ -69,8 +60,13 @@ function Door({ dayNumber, unlocked, onOpen, unlockLabel, icon }) {
       )}
       <span className="door-number">{dayNumber}</span>
       <span className="door-status" aria-hidden="true">
-        {unlocked ? 'Trykk for å åpne' : `Åpner ${unlockLabel}`}
+        {unlocked ? (opened ? 'Åpnet' : 'Trykk for å åpne') : `Åpner ${unlockLabel}`}
       </span>
+      {opened && (
+        <span className="opened-badge" aria-hidden="true">
+          ⭐
+        </span>
+      )}
     </button>
   )
 }

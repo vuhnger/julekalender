@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;700&display=swap');
 
 :root {
-  --cranberry: #b3203b;
-  --pine: #1c4632;
-  --gold: #f3d08a;
-  --cream: #fff8f0;
-  --text: #13231d;
+  --red-dark: #c30022;
+  --red: #d40028;
+  --green-deep: #036f3e;
+  --green-mid: #00a53c;
+  --green-light: #13cc4e;
+  --cream: #ffffff;
+  --text: #ffffff;
   --shadow: rgba(0, 0, 0, 0.2);
 }
 
@@ -16,8 +18,10 @@
 body {
   margin: 0;
   font-family: 'Nunito', system-ui, -apple-system, sans-serif;
-  background: linear-gradient(135deg, #0c2f24 0%, #14412f 65%, #0d2f55 100%);
-  color: var(--cream);
+  background: var(--green-deep);
+  background-color: var(--green-deep);
+  background-attachment: fixed;
+  color: var(--text);
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
@@ -41,38 +45,13 @@ button {
 
 #root {
   width: 100%;
+  background: transparent;
 }
 
-.snow {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.9)),
-    radial-gradient(1.5px 1.5px at 60px 80px, rgba(255, 255, 255, 0.9)),
-    radial-gradient(1px 1px at 120px 140px, rgba(255, 255, 255, 0.9)),
-    radial-gradient(1.2px 1.2px at 200px 220px, rgba(255, 255, 255, 0.9));
-  background-repeat: repeat;
-  opacity: 0.5;
-  animation: snow-fall 18s linear infinite;
-  z-index: 0;
-}
-
-.snow--back {
-  filter: blur(0.4px);
-  animation-duration: 24s;
-  opacity: 0.35;
-}
-
-.snow--front {
-  animation-duration: 14s;
-  opacity: 0.6;
-}
-
-@keyframes snow-fall {
-  from {
-    background-position: 0 0, 0 0, 0 0, 0 0;
-  }
-  to {
-    background-position: 0 900px, 0 900px, 0 900px, 0 900px;
-  }
+/* Force full-page green background regardless of other wrappers */
+html,
+body,
+#root {
+  background: var(--green-deep) !important;
+  color: var(--text);
 }
