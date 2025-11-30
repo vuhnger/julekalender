@@ -10,7 +10,7 @@ const STORAGE_KEY = 'julekalender_openedDoors'
 function App() {
   const [activeDoor, setActiveDoor] = useState(null)
   const [openedDoors, setOpenedDoors] = useState([])
-  const [snowCount] = useState(() => Math.floor(Math.random() * (5000 - 300 + 1)) + 300)
+  const [snowCount] = useState(() => Math.floor(Math.random() * (2000 - 200 + 1)) + 200)
   const targetChristmas = useMemo(() => new Date(TARGET_YEAR, TARGET_MONTH, 24, 0, 0, 0), [])
   const computeCountdown = (target) => {
     const now = Date.now()
@@ -64,10 +64,26 @@ function App() {
       ? 'Nedtellingen er i gang—lukene åpner daglig i desember 2025.'
       : 'Trykk på en ulåst luke for å se hva som venter.'
 
-  const getDoorContent = (dayNumber) => ({
-    title: `Dag ${dayNumber}`,
-    body: 'Innhold for denne dagen kommer her ✨',
-  })
+  // Legg inn valgfritt innhold pr. dag i dette kartet. Bruk ren tekst, lenker eller JSX.
+  const doorContentMap = {
+    // 1: {
+    //   title: 'Første overraskelse',
+    //   content: (
+    //     <>
+    //       <p>Her kan du legge tekst, bilder eller lenker.</p>
+    //       <a href="https://example.com" target="_blank" rel="noreferrer">
+    //         Eksempel-lenke
+    //       </a>
+    //     </>
+    //   ),
+    // },
+  }
+
+  const getDoorContent = (dayNumber) =>
+    doorContentMap[dayNumber] || {
+      title: `Dag ${dayNumber}`,
+      content: <p>Her kan du legge inn tekst eller lenker for dag {dayNumber}.</p>,
+    }
 
   const openDoorContent = activeDoor ? getDoorContent(activeDoor) : null
 
@@ -144,9 +160,9 @@ function App() {
             aria-label={`Innhold for dag ${activeDoor}`}
             onClick={(event) => event.stopPropagation()}
           >
-            <p className="eyebrow">Dag {activeDoor}</p>
+            <p className="eyebrow">Dagens luke</p>
             <h2>{openDoorContent.title}</h2>
-            <p className="dialog-body">{openDoorContent.body}</p>
+            <div className="dialog-body">{openDoorContent.content}</div>
             <button type="button" className="close-button" onClick={closePanel}>
               Lukk
             </button>
