@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Snowfall from 'react-snowfall'
 import AdventCalendar from './components/AdventCalendar'
+import contentData from './content.json'
 import './App.css'
 
 const TARGET_YEAR = 2025
@@ -52,7 +53,7 @@ const getTodayParts = () => {
 function App() {
   const [activeDoor, setActiveDoor] = useState(null)
   const [openedDoors, setOpenedDoors] = useState([])
-  const [snowCount] = useState(() => Math.floor(Math.random() * (5000 - 300 + 1)) + 300)
+  const [snowCount] = useState(() => Math.floor(Math.random() * (2000 - 200 + 1)) + 200)
   const todayParts = useMemo(() => getTodayParts(), [])
   const todayKey = datePartsToKey(todayParts)
   const todayDate = useMemo(
@@ -108,26 +109,19 @@ function App() {
       ? 'Nedtellingen er i gang—lukene åpner daglig i desember 2025.'
       : 'Trykk på en ulåst luke for å se hva som venter.'
 
-  // Legg inn valgfritt innhold pr. dag i dette kartet. Bruk ren tekst, lenker eller JSX.
-  const doorContentMap = {
-    1: {
-      title: 'Første overraskelse',
-      content: (
-        <>
-          <p>Her kan du legge tekst, bilder eller lenker.</p>
-          <a href="https://example.com" target="_blank" rel="noreferrer">
-            Eksempel-lenke
-          </a>
-        </>
-      ),
-    },
-  }
-
-  const getDoorContent = (dayNumber) =>
-    doorContentMap[dayNumber] || {
+  const getDoorContent = (dayNumber) => {
+    const entry = contentData[String(dayNumber)]
+    if (entry) {
+      return {
+        title: entry.title || `Dag ${dayNumber}`,
+        content: entry.body ? <p>{entry.body}</p> : <p></p>,
+      }
+    }
+    return {
       title: `Dag ${dayNumber}`,
       content: <p>Her kan du legge inn tekst eller lenker for dag {dayNumber}.</p>,
     }
+  }
 
   const openDoorContent = activeDoor ? getDoorContent(activeDoor) : null
 
