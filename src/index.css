@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 :root {
   --red-dark: #c30022;
@@ -17,7 +17,9 @@
 
 body {
   margin: 0;
-  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  font-family: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  letter-spacing: 0.02em;
   background: var(--green-deep);
   background-color: var(--green-deep);
   background-attachment: fixed;
@@ -26,13 +28,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   padding: 0;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: 'Playfair Display', 'Times New Roman', serif;
 }
 
 a {

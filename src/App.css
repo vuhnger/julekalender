@@ -116,8 +116,8 @@ h1 {
 }
 
 .door-dialog {
-  background: var(--green-deep);
-  color: #ffffff;
+  background: #f3e8d2;
+  color: #2a1d16;
   border-radius: 12px;
   padding: 20px 18px;
   width: min(520px, 100%);
@@ -126,7 +126,7 @@ h1 {
 
 .door-dialog h2 {
   margin: 4px 0 10px;
-  color: #ffffff;
+  color: #2a1d16;
   font-size: 1.35rem;
 }
 

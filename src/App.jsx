@@ -6,11 +6,59 @@ import './App.css'
 const TARGET_YEAR = 2025
 const TARGET_MONTH = 11 // December is month index 11
 const STORAGE_KEY = 'julekalender_openedDoors'
+const DATE_OVERRIDE_KEY = 'julekalender_date_override'
+const osloFormatter = new Intl.DateTimeFormat('nb-NO', {
+  timeZone: 'Europe/Oslo',
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+})
+
+const parseNorwegianDate = (value) => {
+  if (!value) return null
+  const match = value.trim().match(/^(\d{1,2})[-.](\d{1,2})[-.](\d{4})$/)
+  if (!match) return null
+  const day = Number(match[1])
+  const month = Number(match[2])
+  const year = Number(match[3])
+  if (month < 1 || month > 12 || day < 1 || day > 31) return null
+  return { day, month, year }
+}
+
+const datePartsToKey = ({ day, month, year }) => year * 10000 + month * 100 + day
+
+const getOsloTodayParts = () => {
+  const parts = osloFormatter.formatToParts(new Date())
+  const map = {}
+  parts.forEach(({ type, value }) => {
+    if (type === 'day' || type === 'month' || type === 'year') {
+      map[type] = Number(value)
+    }
+  })
+  return { day: map.day, month: map.month, year: map.year }
+}
+
+const getTodayParts = () => {
+  const params = new URLSearchParams(window.location.search)
+  const raw = params.get('date') || params.get('dato') || localStorage.getItem(DATE_OVERRIDE_KEY)
+  const parsed = parseNorwegianDate(raw)
+  if (parsed) {
+    localStorage.setItem(DATE_OVERRIDE_KEY, raw)
+    return parsed
+  }
+  return getOsloTodayParts()
+}
 
 function App() {
   const [activeDoor, setActiveDoor] = useState(null)
   const [openedDoors, setOpenedDoors] = useState([])
-  const [snowCount] = useState(() => Math.floor(Math.random() * (2000 - 200 + 1)) + 200)
+  const [snowCount] = useState(() => Math.floor(Math.random() * (5000 - 300 + 1)) + 300)
+  const todayParts = useMemo(() => getTodayParts(), [])
+  const todayKey = datePartsToKey(todayParts)
+  const todayDate = useMemo(
+    () => new Date(todayParts.year, todayParts.month - 1, todayParts.day),
+    [todayParts],
+  )
   const targetChristmas = useMemo(() => new Date(TARGET_YEAR, TARGET_MONTH, 24, 0, 0, 0), [])
   const computeCountdown = (target) => {
     const now = Date.now()
@@ -30,15 +78,10 @@ function App() {
   }
   const [countdown, setCountdown] = useState(() => computeCountdown(targetChristmas))
 
-  // Normalize to local midnight to avoid off-by-one issues across timezones.
-  const today = useMemo(() => {
-    const now = new Date()
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  }, [])
-
   const getDoorDate = (dayNumber) => new Date(TARGET_YEAR, TARGET_MONTH, dayNumber)
 
-  const isDoorUnlocked = (dayNumber) => getDoorDate(dayNumber) <= today
+  const isDoorUnlocked = (dayNumber) =>
+    datePartsToKey({ year: TARGET_YEAR, month: TARGET_MONTH + 1, day: dayNumber }) <= todayKey
   const isDoorOpened = (dayNumber) => openedDoors.includes(dayNumber)
 
   const handleDoorSelect = (dayNumber) => {
@@ -51,32 +94,33 @@ function App() {
 
   const closePanel = () => setActiveDoor(null)
 
-  const formattedToday = today.toLocaleDateString('nb-NO', {
+  const formattedToday = todayDate.toLocaleDateString('nb-NO', {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'Europe/Oslo',
   })
 
-  const decemberBegins = getDoorDate(1)
+  const decemberBeginsKey = datePartsToKey({ year: TARGET_YEAR, month: TARGET_MONTH + 1, day: 1 })
   const helperCopy =
-    today < decemberBegins
+    todayKey < decemberBeginsKey
       ? 'Nedtellingen er i gang—lukene åpner daglig i desember 2025.'
       : 'Trykk på en ulåst luke for å se hva som venter.'
 
   // Legg inn valgfritt innhold pr. dag i dette kartet. Bruk ren tekst, lenker eller JSX.
   const doorContentMap = {
-    // 1: {
-    //   title: 'Første overraskelse',
-    //   content: (
-    //     <>
-    //       <p>Her kan du legge tekst, bilder eller lenker.</p>
-    //       <a href="https://example.com" target="_blank" rel="noreferrer">
-    //         Eksempel-lenke
-    //       </a>
-    //     </>
-    //   ),
-    // },
+    1: {
+      title: 'Første overraskelse',
+      content: (
+        <>
+          <p>Her kan du legge tekst, bilder eller lenker.</p>
+          <a href="https://example.com" target="_blank" rel="noreferrer">
+            Eksempel-lenke
+          </a>
+        </>
+      ),
+    },
   }
 
   const getDoorContent = (dayNumber) =>
