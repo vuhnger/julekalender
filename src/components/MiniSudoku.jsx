@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 // Standard 9x9 demo-puzzle (0/. = tom)
 const defaultPuzzle = '53..7....6..195....98....6.8...6...34..8.3..17...2...6....28....419..5....8..79'
@@ -43,12 +43,6 @@ function MiniSudoku({ puzzle }) {
     const root = Math.sqrt(size)
     return Number.isInteger(root) ? root : 3
   }, [size])
-
-  useEffect(() => {
-    setValues(cells)
-    setMessage('')
-    setMessageType('info')
-  }, [cells])
 
   const handleChange = (idx, val) => {
     if (fixed.includes(idx)) return

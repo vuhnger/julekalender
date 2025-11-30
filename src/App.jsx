@@ -57,6 +57,7 @@ function App() {
   const [checkingAccess, setCheckingAccess] = useState(true)
   const [passInput, setPassInput] = useState('')
   const [passError, setPassError] = useState('')
+  const [openCountdown, setOpenCountdown] = useState('')
   const [activeDoor, setActiveDoor] = useState(null)
   const [openedDoors, setOpenedDoors] = useState([])
   const [snowCount] = useState(() => Math.floor(Math.random() * (200 - 50 + 1)) + 50)
@@ -120,6 +121,22 @@ function App() {
     setCheckingAccess(false)
   }, [])
 
+  useEffect(() => {
+    const targetOpen = new Date(TARGET_YEAR, TARGET_MONTH, 1, 0, 0, 0)
+    const formatCountdown = () => {
+      const diff = targetOpen.getTime() - Date.now()
+      if (diff <= 0) return 'Kalenderen er åpen!'
+      const totalSeconds = Math.floor(diff / 1000)
+      const days = Math.floor(totalSeconds / 86400)
+      const hours = Math.floor((totalSeconds % 86400) / 3600)
+      const minutes = Math.floor((totalSeconds % 3600) / 60)
+      return `${days}d ${hours}t ${minutes}m til 1. desember`
+    }
+    setOpenCountdown(formatCountdown())
+    const id = setInterval(() => setOpenCountdown(formatCountdown()), 1000 * 30)
+    return () => clearInterval(id)
+  }, [])
+
   const handleUnlock = async (event) => {
     event.preventDefault()
     setPassError('')
@@ -179,11 +196,19 @@ function App() {
             top: 0,
             left: 0,
             pointerEvents: 'none',
-            zIndex: 1,
+          zIndex: 1,
           }}
         />
+        <div className="gate-decor gate-decor-top" aria-hidden="true">
+          🎅 🦌 🦌 🛷 ✨
+        </div>
+        <div className="gate-decor gate-decor-bottom" aria-hidden="true">
+          🔥 🪵 ✨
+        </div>
         <div className="gate-card">
-          <h1>Kodeluke</h1>
+          <h1 className="gate-title">Amélie sin julekalender</h1>
+          {openCountdown && <p className="gate-countdown">{openCountdown}</p>}
+          <h2>Kodeluke</h2>
           <p>Skriv inn passordet for kalenderen.</p>
           <form onSubmit={handleUnlock} className="gate-form">
             <input
@@ -246,7 +271,7 @@ function App() {
           >
             <p className="eyebrow">Dagens luke</p>
             <div className="dialog-body">
-              <ContentRenderer entry={openDoorContent} dayNumber={activeDoor} onClose={closePanel} />
+              <ContentRenderer entry={openDoorContent} dayNumber={activeDoor} />
             </div>
             <button type="button" className="close-button" onClick={closePanel}>
               Lukk

@@ -6,7 +6,6 @@ function safeEval(code) {
   try {
     // Isolate from global scope as much as feasible in browser context.
     // We shadow common globals to reduce accidental access.
-    // eslint-disable-next-line no-new-func
     const fn = new Function(
       '"use strict"; const window=undefined, document=undefined, localStorage=undefined, sessionStorage=undefined, location=undefined; ' +
         code,
@@ -29,8 +28,8 @@ const allowedEmbed = (url) => {
   }
 }
 
-function ContentRenderer({ entry, dayNumber, onClose }) {
-  const [code, setCode] = useState(entry.starter || "console.log('Hei!')")
+function ContentRenderer({ entry, dayNumber }) {
+  const [code] = useState(entry.starter || "console.log('Hei!')")
   const [codeResult, setCodeResult] = useState(null)
   const [foundDiffs, setFoundDiffs] = useState(() =>
     Array.isArray(entry.differences) ? entry.differences.map(() => false) : [],
@@ -115,13 +114,7 @@ function ContentRenderer({ entry, dayNumber, onClose }) {
         <>
           <h2>{title}</h2>
           <p>Skriv JavaScript og kjør.</p>
-          <textarea
-            className="code-input"
-            value={code}
-            onChange={() => {}}
-            rows={6}
-            readOnly
-          />
+          <textarea className="code-input" value={code} rows={6} readOnly />
           <div className="code-actions">
             <button type="button" className="primary-button" onClick={handleRunCode}>
               Kjør
@@ -152,7 +145,7 @@ function ContentRenderer({ entry, dayNumber, onClose }) {
       return (
         <>
           <h2>{title}</h2>
-          <MiniSudoku puzzle={entry.puzzle || ''} />
+          <MiniSudoku key={entry.puzzle || 'default-sudoku'} puzzle={entry.puzzle || ''} />
           <p className="rules-note">{sudokuRuleText()}</p>
         </>
       )

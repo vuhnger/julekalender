@@ -33,10 +33,10 @@ function MiniWordle({ solution }) {
     }
   }
 
-  const renderRow = (g) => {
+  const renderRow = (g, rowIdx) => {
     const letters = g.padEnd(target.length, ' ').slice(0, target.length).split('')
     return (
-      <div className="wordle-row" key={g + Math.random()}>
+      <div className="wordle-row" key={`row-${rowIdx}-${g}`}>
         {letters.map((ch, idx) => {
           const correct = ch === target[idx]
           const present = !correct && target.includes(ch)
@@ -54,7 +54,7 @@ function MiniWordle({ solution }) {
   return (
     <div className="wordle">
       <div className="wordle-board">
-        {guesses.map(renderRow)}
+        {guesses.map((g, rowIdx) => renderRow(g, rowIdx))}
         {status ? (
           <p className="wordle-status">{status}</p>
         ) : (
