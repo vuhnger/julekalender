@@ -7,6 +7,72 @@
   },
   "3": { "type": "wordle", "title": "Mini-wordle", "seed": "PENNY", "rules": "Gjett ordet på antall bokstaver. Grønn=rett plass, gul=rett bokstav feil plass, grå=feil bokstav." },
   "4": { "type": "redirect", "title": "Gå til", "url": "https://example.com" },
-  "5": { "type": "sudoku", "title": "Mini-sudoku", "puzzle": "1..4.2..3" },
-  "6": { "type": "code", "title": "Kjør kode", "starter": "console.log('Hei');" }
+  "5": {
+    "type": "recipe",
+    "title": "Kokkekort",
+    "body": "En liten julekakao.",
+    "ingredients": ["2 dl melk", "1 ss kakao", "1 ss sukker", "Krem på topp"],
+    "steps": ["Varm melk forsiktig.", "Rør inn kakao og sukker.", "Hell i kopp og topp med krem."]
+  },
+  "6": { "type": "code", "title": "Kjør kode", "starter": "console.log('Hei');" },
+  "7": {
+    "type": "spot-diff",
+    "title": "Finn forskjellene",
+    "differences": ["En ekstra stjerne på treet", "Gave borte", "Snøfnugg byttet farge"]
+  },
+  "8": {
+    "type": "gift-wrap",
+    "title": "Gavepakking",
+    "body": "Hvilket papir passer best?",
+    "options": ["Striper", "Røde prikker", "Snøfnugg"],
+    "correct": 2
+  },
+  "9": {
+    "type": "rhyme",
+    "title": "Julerim-generator",
+    "body": "Skriv et ord og få et rim."
+  },
+  "10": {
+    "type": "quiz",
+    "title": "Julequiz",
+    "questions": [
+      {
+        "question": "Hva er klassisk julekrydder i gløgg?",
+        "options": ["Vanilje", "Kanel", "Pepper"],
+        "correct": 1
+      },
+      {
+        "question": "Hvilket dyr trekker nissens slede?",
+        "options": ["Hester", "Reinsdyr", "Kyr"],
+        "correct": 1
+      }
+    ]
+  },
+  "11": { "type": "text", "title": "Julehilsen", "body": "God førjulskveld – du er min favorittperson i hele verden." },
+  "12": { "type": "wordle", "title": "Wordle-mini", "seed": "SNOW", "rules": "Gjett ordet. Grønn = rett plass, gul = rett bokstav, grå = feil." },
+  "13": {
+    "type": "recipe",
+    "title": "Kokoskuler",
+    "body": "Enkle søte biter.",
+    "ingredients": ["2 dl havregryn", "1 dl kokos", "0.5 dl sukker", "2 ss kakao", "2 ss kaffe"],
+    "steps": ["Bland alt tørt.", "Rør inn kaffe til deigen kan trilles.", "Trill kuler og vend i kokos."]
+  },
+  "14": { "type": "rhyme", "title": "Rim for deg", "body": "Skriv et ord – få et lite rim tilbake." },
+  "15": {
+    "type": "quiz",
+    "title": "Film eller sang?",
+    "questions": [
+      { "question": "“Last Christmas” er …", "options": ["En film", "En sang", "Begge deler"], "correct": 2 },
+      { "question": "“Home Alone” er …", "options": ["En film", "En bok", "En konfekt"], "correct": 0 }
+    ]
+  },
+  "16": { "type": "gift-wrap", "title": "Gavebånd", "body": "Hvilket bånd passer?", "options": ["Gullbånd", "Rødt silkebånd", "Natursnor"], "correct": 1 },
+  "17": { "type": "spot-diff", "title": "Mini-forskjell", "differences": ["Pepperkake-mann snudd", "Lys mangler", "Hjerte flyttet"] },
+  "18": { "type": "text", "title": "Koselig hilsen", "body": "Tenk at vi snart feirer jul sammen – jeg gleder meg til kakao og filmkveld." },
+  "19": { "type": "code", "title": "Kodeluke mini", "starter": "console.log('Nissen kom forbi 🎅');" },
+  "20": { "type": "wordle", "title": "Wordle-mini", "seed": "LYS", "rules": "Gjett ordet. Grønn = rett plass, gul = rett bokstav, grå = feil." },
+  "21": { "type": "recipe", "title": "Gløggkoppen", "body": "Varm eplejuice med kanel og nellik. Server med rosiner og mandler." },
+  "22": { "type": "rhyme", "title": "Rim igjen", "body": "Et lite rim for kvelden." },
+  "23": { "type": "quiz", "title": "Juleblanding", "questions": [{ "question": "Hvem eier Rudolf?", "options": ["Nissen", "Grinchen", "Frosty"], "correct": 0 }] },
+  "24": { "type": "text", "title": "Julaften", "body": "Endelig her. God jul, vi klarte det! ❤️" }
 }

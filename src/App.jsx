@@ -62,10 +62,6 @@ function App() {
   const [snowCount] = useState(() => Math.floor(Math.random() * (200 - 50 + 1)) + 50)
   const todayParts = useMemo(() => getTodayParts(), [])
   const todayKey = datePartsToKey(todayParts)
-  const todayDate = useMemo(
-    () => new Date(todayParts.year, todayParts.month - 1, todayParts.day),
-    [todayParts],
-  )
   const targetChristmas = useMemo(() => new Date(TARGET_YEAR, TARGET_MONTH, 24, 0, 0, 0), [])
   const computeCountdown = (target) => {
     const now = Date.now()
@@ -100,20 +96,6 @@ function App() {
   }
 
   const closePanel = () => setActiveDoor(null)
-
-  const formattedToday = todayDate.toLocaleDateString('nb-NO', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'Europe/Oslo',
-  })
-
-  const decemberBeginsKey = datePartsToKey({ year: TARGET_YEAR, month: TARGET_MONTH + 1, day: 1 })
-  const helperCopy =
-    todayKey < decemberBeginsKey
-      ? 'Nedtellingen er i gang—lukene åpner daglig i desember 2025.'
-      : 'Trykk på en ulåst luke for å se hva som venter.'
 
   const getDoorContent = (dayNumber) => contentData[String(dayNumber)] || null
 
@@ -188,6 +170,18 @@ function App() {
   if (!authorized) {
     return (
       <div className="gate-shell">
+        <Snowfall
+          snowflakeCount={80}
+          style={{
+            position: 'fixed',
+            width: '100vw',
+            height: '100vh',
+            top: 0,
+            left: 0,
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
         <div className="gate-card">
           <h1>Kodeluke</h1>
           <p>Skriv inn passordet for kalenderen.</p>
@@ -229,10 +223,6 @@ function App() {
         <p className="lede">
           Du kan åpne én luke hver dag.
         </p>
-        <div className="status-row" aria-live="polite">
-          <span className="date-chip">I dag: {formattedToday}</span>
-          <span className="helper">{helperCopy}</span>
-        </div>
         <div className="countdown-row" aria-live="polite">
           <span className="countdown-chip">{countdown.label}</span>
         </div>

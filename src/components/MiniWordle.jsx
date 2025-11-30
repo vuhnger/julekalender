@@ -8,6 +8,7 @@ function MiniWordle({ solution }) {
   const [guesses, setGuesses] = useState([])
   const [status, setStatus] = useState(null)
   const [error, setError] = useState('')
+  const [showHint, setShowHint] = useState(false)
 
   const submitGuess = () => {
     const clean = guess.trim().toUpperCase()
@@ -73,6 +74,16 @@ function MiniWordle({ solution }) {
           )
         )}
         {error && <p className="wordle-error">{error}</p>}
+        <div className="wordle-hint-row">
+          <button type="button" className="secondary-button" onClick={() => setShowHint((v) => !v)}>
+            {showHint ? 'Skjul hint' : 'Vis hint'}
+          </button>
+          {showHint && (
+            <p className="wordle-hint">
+              Hint: Ordet starter med {target[0]} og er {target.length} bokstaver.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   )
