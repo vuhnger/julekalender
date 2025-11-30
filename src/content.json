@@ -1,11 +1,11 @@
 {
-  "1": { "type": "sudoku", "title": "Sudoku", "puzzle": "", "rules": "Bruk tallene 1–9. Hver rad og kolonne skal ha hvert tall én gang. Forhåndsfylte ruter kan ikke endres." },
+  "1": { "type": "wordle", "title": "Mini-wordle", "seed": "PENNY", "rules": "Gjett ordet på antall bokstaver. Grønn=rett plass, gul=rett bokstav feil plass, grå=feil bokstav." },
   "2": {
     "type": "code",
     "title": "Kodeluke",
-    "starter": "const encoded = 'R29kIGp1bA==';\nconst decoded = atob(encoded);\nconsole.log(decoded);\nreturn decoded;"
+    "starter": "const encoded = 'Z2xhZCBpIGRlZywgZ29kIGp1bA==';\nconst decoded = atob(encoded);\nconsole.log(decoded);\nreturn decoded;"
   },
-  "3": { "type": "wordle", "title": "Mini-wordle", "seed": "PENNY", "rules": "Gjett ordet på antall bokstaver. Grønn=rett plass, gul=rett bokstav feil plass, grå=feil bokstav." },
+  "3": { "type": "sudoku", "title": "Sudoku", "puzzle": "", "rules": "Bruk tallene 1–9. Hver rad og kolonne skal ha hvert tall én gang. Forhåndsfylte ruter kan ikke endres." },
   "4": { "type": "redirect", "title": "Gå til", "url": "https://example.com" },
   "5": {
     "type": "recipe",
@@ -49,7 +49,7 @@
     ]
   },
   "11": { "type": "text", "title": "Julehilsen", "body": "God førjulskveld – du er min favorittperson i hele verden." },
-  "12": { "type": "wordle", "title": "Wordle-mini", "seed": "SNOW", "rules": "Gjett ordet. Grønn = rett plass, gul = rett bokstav, grå = feil." },
+  "12": { "type": "wordle", "title": "Wordle-mini", "seed": "GYMP", "rules": "Gjett ordet. Grønn = rett plass, gul = rett bokstav, grå = feil." },
   "13": {
     "type": "recipe",
     "title": "Kokoskuler",

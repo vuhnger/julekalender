@@ -43,10 +43,8 @@ function ContentRenderer({ entry, dayNumber }) {
   const iframeRef = useRef(null)
 
   const title = entry.title || `Dag ${dayNumber}`
-  const ruleText = entry.rules || null
 
   const sudokuRuleText = () => {
-    if (ruleText) return ruleText
     const cleaned = (entry.puzzle || '').replace(/[^0-9.]/g, '')
     const size = Math.max(3, Math.ceil(Math.sqrt(cleaned.length || 9)))
     const maxDigit = Math.min(9, size)
@@ -54,6 +52,19 @@ function ContentRenderer({ entry, dayNumber }) {
   }
 
   const videoAllowed = useMemo(() => allowedEmbed(entry.url), [entry.url])
+  const wordleRules =
+    'Regler: Gjett ordet med rett antall bokstaver. Grønn = rett bokstav rett plass, gul = rett bokstav feil plass, grå = ikke i ordet.'
+
+  const fallbackText = 'Ingen tekst er lagt inn ennå. God jul! 🎄'
+  const fallbackRecipe = {
+    ingredients: ['2 dl melk', '1 ss kakao', '1 ss sukker'],
+    steps: ['Varm melk forsiktig.', 'Visp inn kakao og sukker.', 'Hell i kopp og nyt.'],
+  }
+  const fallbackDiffs = ['Detalj 1', 'Detalj 2', 'Detalj 3']
+  const fallbackGiftOptions = ['Papir A', 'Papir B', 'Papir C']
+  const fallbackQuiz = [
+    { question: 'Hva heter nissen?', options: ['Nissen', 'Grinchen', 'Snøfnugg'], correct: 0 },
+  ]
 
   const handleRunCode = () => {
     const res = safeEval(code || '')
@@ -74,7 +85,7 @@ function ContentRenderer({ entry, dayNumber }) {
       return (
         <>
           <h2>{title}</h2>
-          <p>{entry.body || 'Ingen tekst lagt inn.'}</p>
+          <p>{entry.body || fallbackText}</p>
         </>
       )
 
@@ -134,10 +145,7 @@ function ContentRenderer({ entry, dayNumber }) {
         <>
           <h2>{title}</h2>
           <MiniWordle solution={(entry.seed || 'NOEL').toUpperCase()} />
-          <p className="rules-note">
-            {ruleText ||
-              'Regler: Gjett ordet med rett antall bokstaver. Grønn = rett bokstav rett plass, gul = rett bokstav feil plass, grå = ikke i ordet.'}
-          </p>
+          <p className="rules-note">{wordleRules}</p>
         </>
       )
 
@@ -159,12 +167,14 @@ function ContentRenderer({ entry, dayNumber }) {
       )
 
     case 'recipe': {
-      const ingredients = Array.isArray(entry.ingredients) ? entry.ingredients : []
-      const steps = Array.isArray(entry.steps) ? entry.steps : []
+      const ingredients = Array.isArray(entry.ingredients)
+        ? entry.ingredients
+        : fallbackRecipe.ingredients
+      const steps = Array.isArray(entry.steps) ? entry.steps : fallbackRecipe.steps
       return (
         <>
           <h2>{title}</h2>
-          {entry.body && <p>{entry.body}</p>}
+          <p>{entry.body || 'Liten oppskrift for kos.'}</p>
           {ingredients.length > 0 && (
             <>
               <h3>Ingredienser</h3>
@@ -190,7 +200,7 @@ function ContentRenderer({ entry, dayNumber }) {
     }
 
     case 'spot-diff': {
-      const diffs = Array.isArray(entry.differences) ? entry.differences : []
+      const diffs = Array.isArray(entry.differences) ? entry.differences : fallbackDiffs
       const toggleDiff = (index) => {
         const next = [...foundDiffs]
         next[index] = !next[index]
@@ -221,7 +231,7 @@ function ContentRenderer({ entry, dayNumber }) {
     }
 
     case 'gift-wrap': {
-      const options = Array.isArray(entry.options) ? entry.options : []
+      const options = Array.isArray(entry.options) ? entry.options : fallbackGiftOptions
       const correct = typeof entry.correct === 'number' ? entry.correct : 0
       const pick = (idx) => {
         setGiftChoice(idx)
@@ -281,7 +291,7 @@ function ContentRenderer({ entry, dayNumber }) {
     }
 
     case 'quiz': {
-      const questions = Array.isArray(entry.questions) ? entry.questions : []
+      const questions = Array.isArray(entry.questions) ? entry.questions : fallbackQuiz
       const submitQuiz = () => {
         let correct = 0
         questions.forEach((q, idx) => {
