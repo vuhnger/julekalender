@@ -1,10 +1,12 @@
 {
-  "1": {
-    "title": "Velkommen til luke 1",
-    "body": "Her kan du legge inn tekst eller lenker for dag 1."
-  },
+  "1": { "type": "sudoku", "title": "Sudoku", "puzzle": "", "rules": "Bruk tallene 1–9. Hver rad og kolonne skal ha hvert tall én gang. Forhåndsfylte ruter kan ikke endres." },
   "2": {
-    "title": "Luke 2",
-    "body": "Oppdater denne teksten med noe koselig."
-  }
+    "type": "code",
+    "title": "Kodeluke",
+    "starter": "const encoded = 'R29kIGp1bA==';\nconst decoded = atob(encoded);\nconsole.log(decoded);\nreturn decoded;"
+  },
+  "3": { "type": "wordle", "title": "Mini-wordle", "seed": "PENNY", "rules": "Gjett ordet på antall bokstaver. Grønn=rett plass, gul=rett bokstav feil plass, grå=feil bokstav." },
+  "4": { "type": "redirect", "title": "Gå til", "url": "https://example.com" },
+  "5": { "type": "sudoku", "title": "Mini-sudoku", "puzzle": "1..4.2..3" },
+  "6": { "type": "code", "title": "Kjør kode", "starter": "console.log('Hei');" }
 }

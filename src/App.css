@@ -119,9 +119,11 @@ h1 {
   background: #f3e8d2;
   color: #2a1d16;
   border-radius: 12px;
-  padding: 20px 18px;
-  width: min(520px, 100%);
+  padding: 16px 14px;
+  width: min(520px, 94vw);
   box-shadow: none;
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
 .door-dialog h2 {
@@ -148,6 +150,177 @@ h1 {
 .close-button:hover,
 .close-button:focus-visible {
   filter: brightness(1.02);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 12px 0;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.primary-button {
+  background: var(--red);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.secondary-button {
+  background: transparent;
+  color: #2a1d16;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.code-input {
+  width: 100%;
+  font-family: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  background: #fffaf5;
+}
+
+.code-actions {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 6px;
+}
+
+.code-output {
+  background: #1b1b1b;
+  color: #e8e8e8;
+  padding: 10px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+
+.code-output.error {
+  background: #3a0f0f;
+  color: #ffe2e2;
+}
+
+.wordle-input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.wordle-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+}
+
+.wordle-row {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.wordle-cell {
+  width: clamp(32px, 10vw, 42px);
+  height: clamp(32px, 10vw, 42px);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: #e5e5e5;
+}
+
+.wordle-cell--correct {
+  background: #00a53c;
+  color: #fff;
+}
+
+.wordle-cell--present {
+  background: #d4b200;
+  color: #1f1f1f;
+}
+
+.wordle-cell--miss {
+  background: #d0d0d0;
+}
+
+.wordle-status {
+  margin-top: 10px;
+}
+
+.wordle-error {
+  margin-top: 6px;
+  color: #b00020;
+}
+
+.wordle-board {
+  background: #f7f3e8;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.rules-note {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #3a2b22;
+}
+
+.mini-sudoku {
+  margin-top: 8px;
+}
+
+.sudoku-grid {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.sudoku-cell {
+  width: 100%;
+  padding: clamp(6px, 2vw, 12px);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+}
+
+.sudoku-cell.fixed {
+  background: #e5dfd0;
+  font-weight: 700;
+  color: #1f1f1f;
+}
+
+.sudoku-message {
+  margin-top: 6px;
+}
+
+.sudoku-message.ok {
+  color: #008a2e;
+}
+
+.sudoku-message.warn {
+  color: #c99700;
+}
+
+.sudoku-message.error {
+  color: #b00020;
 }
 
 @media (min-width: 640px) {

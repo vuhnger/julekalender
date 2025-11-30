@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Snowfall from 'react-snowfall'
 import AdventCalendar from './components/AdventCalendar'
+import ContentRenderer from './components/ContentRenderer'
 import contentData from './content.json'
 import './App.css'
 
@@ -109,19 +110,7 @@ function App() {
       ? 'Nedtellingen er i gang—lukene åpner daglig i desember 2025.'
       : 'Trykk på en ulåst luke for å se hva som venter.'
 
-  const getDoorContent = (dayNumber) => {
-    const entry = contentData[String(dayNumber)]
-    if (entry) {
-      return {
-        title: entry.title || `Dag ${dayNumber}`,
-        content: entry.body ? <p>{entry.body}</p> : <p></p>,
-      }
-    }
-    return {
-      title: `Dag ${dayNumber}`,
-      content: <p>Her kan du legge inn tekst eller lenker for dag {dayNumber}.</p>,
-    }
-  }
+  const getDoorContent = (dayNumber) => contentData[String(dayNumber)] || null
 
   const openDoorContent = activeDoor ? getDoorContent(activeDoor) : null
 
@@ -199,8 +188,9 @@ function App() {
             onClick={(event) => event.stopPropagation()}
           >
             <p className="eyebrow">Dagens luke</p>
-            <h2>{openDoorContent.title}</h2>
-            <div className="dialog-body">{openDoorContent.content}</div>
+            <div className="dialog-body">
+              <ContentRenderer entry={openDoorContent} dayNumber={activeDoor} onClose={closePanel} />
+            </div>
             <button type="button" className="close-button" onClick={closePanel}>
               Lukk
             </button>
