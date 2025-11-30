@@ -39,6 +39,10 @@ function MiniSudoku({ puzzle }) {
   const [values, setValues] = useState(cells)
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState('info')
+  const blockSize = useMemo(() => {
+    const root = Math.sqrt(size)
+    return Number.isInteger(root) ? root : 3
+  }, [size])
 
   useEffect(() => {
     setValues(cells)
@@ -100,21 +104,41 @@ function MiniSudoku({ puzzle }) {
       <div
         className="sudoku-grid"
         style={{
-          gridTemplateColumns: `repeat(${size}, minmax(40px, 1fr))`,
+          gridTemplateColumns: `repeat(${size}, minmax(clamp(26px, 7vw, 40px), 1fr))`,
         }}
       >
-        {values.map((val, idx) => (
-          <input
-            key={idx}
-            className={`sudoku-cell ${fixed.includes(idx) ? 'fixed' : ''}`}
-            value={val === '.' ? '' : val}
-            onChange={(e) => handleChange(idx, e.target.value)}
-            inputMode="numeric"
-            maxLength={1}
-            aria-label={`Rute ${idx + 1}`}
-            disabled={fixed.includes(idx)}
-          />
-        ))}
+        {values.map((val, idx) => {
+          const row = Math.floor(idx / size)
+          const col = idx % size
+          const thickTop = row % blockSize === 0
+          const thickLeft = col % blockSize === 0
+          const thickBottom = row % blockSize === blockSize - 1
+          const thickRight = col % blockSize === blockSize - 1
+
+          const classes = [
+            'sudoku-cell',
+            fixed.includes(idx) ? 'fixed' : '',
+            thickTop ? 'thick-top' : '',
+            thickLeft ? 'thick-left' : '',
+            thickBottom ? 'thick-bottom' : '',
+            thickRight ? 'thick-right' : '',
+          ]
+            .filter(Boolean)
+            .join(' ')
+
+          return (
+            <input
+              key={idx}
+              className={classes}
+              value={val === '.' ? '' : val}
+              onChange={(e) => handleChange(idx, e.target.value)}
+              inputMode="numeric"
+              maxLength={1}
+              aria-label={`Rute ${idx + 1}`}
+              disabled={fixed.includes(idx)}
+            />
+          )
+        })}
       </div>
       <button type="button" className="primary-button" onClick={check}>
         Sjekk
