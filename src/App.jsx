@@ -54,7 +54,7 @@ const getTodayParts = () => {
 function App() {
   const [activeDoor, setActiveDoor] = useState(null)
   const [openedDoors, setOpenedDoors] = useState([])
-  const [snowCount] = useState(() => Math.floor(Math.random() * (500 - 150 + 1)) + 150)
+  const [snowCount] = useState(() => Math.floor(Math.random() * (200 - 50 + 1)) + 50)
   const todayParts = useMemo(() => getTodayParts(), [])
   const todayKey = datePartsToKey(todayParts)
   const todayDate = useMemo(
