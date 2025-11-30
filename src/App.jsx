@@ -61,6 +61,8 @@ function App() {
   const [activeDoor, setActiveDoor] = useState(null)
   const [openedDoors, setOpenedDoors] = useState([])
   const [snowCount] = useState(() => Math.floor(Math.random() * (200 - 50 + 1)) + 50)
+  const isPreview =
+    typeof window !== 'undefined' ? window.location.pathname === '/preview' : false
   const todayParts = useMemo(() => getTodayParts(), [])
   const todayKey = datePartsToKey(todayParts)
   const targetChristmas = useMemo(() => new Date(TARGET_YEAR, TARGET_MONTH, 24, 0, 0, 0), [])
@@ -176,6 +178,32 @@ function App() {
     return () => clearInterval(id)
   }, [targetChristmas])
 
+  if (isPreview) {
+    const days = Array.from({ length: 24 }, (_, idx) => idx + 1)
+    return (
+      <div className="preview-shell">
+        <h1>Forhåndsvisning</h1>
+        <p>Alle luker renderes her for visuell sjekk.</p>
+        <div className="preview-grid">
+          {days.map((day) => {
+            const entry =
+              contentData[String(day)] || {
+                type: 'text',
+                title: `Dag ${day}`,
+                body: 'Ingen innhold er lagt inn ennå.',
+              }
+            return (
+              <div className="preview-card" key={day}>
+                <p className="preview-day">Dag {day}</p>
+                <ContentRenderer entry={entry} dayNumber={day} />
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
   if (checkingAccess) {
     return (
       <div className="gate-shell">
@@ -196,7 +224,7 @@ function App() {
             top: 0,
             left: 0,
             pointerEvents: 'none',
-          zIndex: 1,
+            zIndex: 1,
           }}
         />
         <div className="gate-decor gate-decor-top" aria-hidden="true">
@@ -244,7 +272,7 @@ function App() {
 
       <header className="hero">
         <p className="eyebrow">Julekalender 2025</p>
-        <h1>Ho, ho ho, velkommen til Digital Julekalender! ;)</h1>
+        <h1>Ho, ho ho, velkommen til din digitale julekalender! ;)</h1>
         <p className="lede">
           Du kan åpne én luke hver dag.
         </p>

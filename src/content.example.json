@@ -1,0 +1,44 @@
+{
+  "1": { "type": "text", "title": "Julehilsen", "body": "En koselig melding her." },
+  "2": {
+    "type": "code",
+    "title": "Kodeluke",
+    "starter": "const encoded = 'Z2xhZCBpIGRlZywgZ29kIGp1bA==';\nconst decoded = atob(encoded);\nconsole.log(decoded);\nreturn decoded;"
+  },
+  "3": { "type": "wordle", "title": "Wordle-mini", "seed": "PENNY" },
+  "4": { "type": "sudoku", "title": "Sudoku", "puzzle": "" },
+  "5": { "type": "video", "title": "Julefilm", "url": "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+  "6": { "type": "redirect", "title": "Gå til", "url": "https://example.com" },
+  "7": {
+    "type": "recipe",
+    "title": "Kokkekort",
+    "body": "En liten julekakao.",
+    "ingredients": ["2 dl melk", "1 ss kakao", "1 ss sukker", "Krem på topp"],
+    "steps": ["Varm melk forsiktig.", "Rør inn kakao og sukker.", "Hell i kopp og topp med krem."]
+  },
+  "8": { "type": "spot-diff", "title": "Finn forskjellene", "differences": ["Forskjell 1", "Forskjell 2", "Forskjell 3"] },
+  "9": {
+    "type": "gift-wrap",
+    "title": "Gavepakking",
+    "body": "Hvilket papir passer best?",
+    "options": ["Striper", "Røde prikker", "Snøfnugg"],
+    "correct": 2
+  },
+  "10": { "type": "rhyme", "title": "Julerim-generator", "body": "Skriv et ord og få et rim." },
+  "11": {
+    "type": "quiz",
+    "title": "Julequiz",
+    "questions": [
+      {
+        "question": "Hva er klassisk julekrydder i gløgg?",
+        "options": ["Vanilje", "Kanel", "Pepper"],
+        "correct": 1
+      },
+      {
+        "question": "Hvilket dyr trekker nissens slede?",
+        "options": ["Hester", "Reinsdyr", "Kyr"],
+        "correct": 1
+      }
+    ]
+  }
+}

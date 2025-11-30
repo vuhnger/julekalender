@@ -5,9 +5,9 @@ export default function RhymeContent({ entry, dayNumber }) {
   const [rhymeInput, setRhymeInput] = useState('')
   const [rhymeOutput, setRhymeOutput] = useState('')
   const templates = [
-    (w) => `${w} i kvelden, lysene tennes i fred.`,
-    (w) => `${w} og pepperkake, julestemning på vei ned.`,
-    (w) => `${w} og snø som daler, vi deler varme smil.`,
+    (w) => `${w} er best i etter eksamensperioden, men kan også brukes inni. ;)`,
+    (w) => `${w} funker, men A er mest glad i pepperkaker, og det skal du få av meg.`,
+    (w) => `${w} mens snøen dekker oslo, og kveldene er mørke, men det jeg vil ha er deg.`,
     (w) => `${w} i vinduet, julen banker på en mil.`,
   ]
   const generate = () => {

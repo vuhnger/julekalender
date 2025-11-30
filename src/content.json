@@ -1,29 +1,29 @@
 {
-  "1": { "type": "wordle", "title": "Mini-wordle", "seed": "PENNY", "rules": "Gjett ordet på antall bokstaver. Grønn=rett plass, gul=rett bokstav feil plass, grå=feil bokstav." },
+  "1": { "type": "wordle", "title": "Mini-wordle", "seed": "PENNY" },
   "2": {
     "type": "code",
     "title": "Kodeluke",
     "starter": "const encoded = 'Z2xhZCBpIGRlZywgZ29kIGp1bA==';\nconst decoded = atob(encoded);\nconsole.log(decoded);\nreturn decoded;"
   },
-  "3": { "type": "sudoku", "title": "Sudoku", "puzzle": "", "rules": "Bruk tallene 1–9. Hver rad og kolonne skal ha hvert tall én gang. Forhåndsfylte ruter kan ikke endres." },
-  "4": { "type": "redirect", "title": "Gå til", "url": "https://example.com" },
-  "5": {
+  "3": { "type": "sudoku", "title": "Sudoku", "puzzle": "" },
+  "4": {
+    "type": "code",
+    "title": "Kode-matte",
+    "starter": "const mask = BigInt('0x' + 'ff'.repeat(8));\nconst a = 123456789n * 987654321n;\nconst b = (a ^ mask) >> 8n;\nconst c = (b * 1337n) & mask;\nconst heart = String.fromCharCode(Number(0x3c)) + '3';\nconsole.log(heart);\nreturn heart;"
+  },
+  "5": { "type": "text", "title": "5. desember", "body": "Ingen algoritmer til deg i dag, lykke til på eksamen <3" },
+  "6": {
     "type": "recipe",
     "title": "Kokkekort",
-    "body": "En liten julekakao.",
+    "body": "En liten julekakao til deg og meg. Vil du lage sammen?",
     "ingredients": ["2 dl melk", "1 ss kakao", "1 ss sukker", "Krem på topp"],
     "steps": ["Varm melk forsiktig.", "Rør inn kakao og sukker.", "Hell i kopp og topp med krem."]
   },
-  "6": { "type": "code", "title": "Kjør kode", "starter": "console.log('Hei');" },
-  "7": {
-    "type": "spot-diff",
-    "title": "Finn forskjellene",
-    "differences": ["En ekstra stjerne på treet", "Gave borte", "Snøfnugg byttet farge"]
-  },
+  "7": { "type": "code", "title": "Kjør kode", "starter": "console.log('Hei');" },
   "8": {
     "type": "gift-wrap",
     "title": "Gavepakking",
-    "body": "Hvilket papir passer best?",
+    "body": "Hvilket papir pakker Victor gavene sine med?",
     "options": ["Striper", "Røde prikker", "Snøfnugg"],
     "correct": 2
   },
@@ -37,19 +37,19 @@
     "title": "Julequiz",
     "questions": [
       {
-        "question": "Hva er klassisk julekrydder i gløgg?",
-        "options": ["Vanilje", "Kanel", "Pepper"],
-        "correct": 1
+        "question": "Hva skjedde 29. september 2024?",
+        "options": ["Det var fredag.", "Victor fikk sommerjobb av Bekk.", "Du og jeg hadde vår første date."],
+        "correct": 2
       },
       {
-        "question": "Hvilket dyr trekker nissens slede?",
-        "options": ["Hester", "Reinsdyr", "Kyr"],
-        "correct": 1
+        "question": "Hvem nusset hvem først?",
+        "options": ["Victor nusset Amélie", "Amélie nusset Victor.", "Det var gjensidig. <3"],
+        "correct": 2
       }
     ]
   },
-  "11": { "type": "text", "title": "Julehilsen", "body": "God førjulskveld – du er min favorittperson i hele verden." },
-  "12": { "type": "wordle", "title": "Wordle-mini", "seed": "GYMP", "rules": "Gjett ordet. Grønn = rett plass, gul = rett bokstav, grå = feil." },
+  "11": { "type": "text", "title": "Julehilsen", "body": "God førjulskveld ;) du er min snack." },
+  "12": { "type": "wordle", "title": "Wordle-mini", "seed": "GYMP" },
   "13": {
     "type": "recipe",
     "title": "Kokoskuler",
@@ -70,7 +70,7 @@
   "17": { "type": "spot-diff", "title": "Mini-forskjell", "differences": ["Pepperkake-mann snudd", "Lys mangler", "Hjerte flyttet"] },
   "18": { "type": "text", "title": "Koselig hilsen", "body": "Tenk at vi snart feirer jul sammen – jeg gleder meg til kakao og filmkveld." },
   "19": { "type": "code", "title": "Kodeluke mini", "starter": "console.log('Nissen kom forbi 🎅');" },
-  "20": { "type": "wordle", "title": "Wordle-mini", "seed": "LYS", "rules": "Gjett ordet. Grønn = rett plass, gul = rett bokstav, grå = feil." },
+  "20": { "type": "wordle", "title": "Wordle-mini", "seed": "LYS" },
   "21": { "type": "recipe", "title": "Gløggkoppen", "body": "Varm eplejuice med kanel og nellik. Server med rosiner og mandler." },
   "22": { "type": "rhyme", "title": "Rim igjen", "body": "Et lite rim for kvelden." },
   "23": { "type": "quiz", "title": "Juleblanding", "questions": [{ "question": "Hvem eier Rudolf?", "options": ["Nissen", "Grinchen", "Frosty"], "correct": 0 }] },
