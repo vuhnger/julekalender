@@ -9,6 +9,7 @@ const TARGET_YEAR = 2025
 const TARGET_MONTH = 11 // December is month index 11
 const STORAGE_KEY = 'julekalender_openedDoors'
 const DATE_OVERRIDE_KEY = 'julekalender_date_override'
+const ACCESS_KEY = 'julekalender_access'
 const osloFormatter = new Intl.DateTimeFormat('nb-NO', {
   timeZone: 'Europe/Oslo',
   year: 'numeric',
@@ -52,6 +53,10 @@ const getTodayParts = () => {
 }
 
 function App() {
+  const [authorized, setAuthorized] = useState(false)
+  const [checkingAccess, setCheckingAccess] = useState(true)
+  const [passInput, setPassInput] = useState('')
+  const [passError, setPassError] = useState('')
   const [activeDoor, setActiveDoor] = useState(null)
   const [openedDoors, setOpenedDoors] = useState([])
   const [snowCount] = useState(() => Math.floor(Math.random() * (200 - 50 + 1)) + 50)
@@ -114,6 +119,38 @@ function App() {
 
   const openDoorContent = activeDoor ? getDoorContent(activeDoor) : null
 
+  const expectedHash = '529c3146271d02cb3aca154b07c979110f70117fa5c8eb6751033fd7b7220606'
+
+  const hashString = async (value) => {
+    const encoder = new TextEncoder()
+    const data = encoder.encode(value)
+    const digest = await crypto.subtle.digest('SHA-256', data)
+    return Array.from(new Uint8Array(digest))
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('')
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem(ACCESS_KEY)
+    if (token === expectedHash) {
+      setAuthorized(true)
+    }
+    setCheckingAccess(false)
+  }, [])
+
+  const handleUnlock = async (event) => {
+    event.preventDefault()
+    setPassError('')
+    const hash = await hashString(passInput.trim())
+    if (hash === expectedHash) {
+      localStorage.setItem(ACCESS_KEY, expectedHash)
+      setAuthorized(true)
+      setPassInput('')
+    } else {
+      setPassError('Feil passord')
+    }
+  }
+
   useEffect(() => {
     const stored =
       typeof window !== 'undefined'
@@ -139,6 +176,36 @@ function App() {
     const id = setInterval(tick, 1000)
     return () => clearInterval(id)
   }, [targetChristmas])
+
+  if (checkingAccess) {
+    return (
+      <div className="gate-shell">
+        <p>Laster …</p>
+      </div>
+    )
+  }
+
+  if (!authorized) {
+    return (
+      <div className="gate-shell">
+        <div className="gate-card">
+          <h1>Kodeluke</h1>
+          <p>Skriv inn passordet for kalenderen.</p>
+          <form onSubmit={handleUnlock} className="gate-form">
+            <input
+              type="password"
+              value={passInput}
+              onChange={(e) => setPassInput(e.target.value)}
+              placeholder="Passord"
+              aria-label="Passord"
+            />
+            <button type="submit">Lås opp</button>
+          </form>
+          {passError && <p className="gate-error">{passError}</p>}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="app-shell">

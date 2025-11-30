@@ -152,6 +152,55 @@ h1 {
   filter: brightness(1.02);
 }
 
+.gate-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--green-deep);
+  color: #ffffff;
+  padding: 24px;
+}
+
+.gate-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px 16px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.gate-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gate-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.gate-form button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--red);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gate-error {
+  margin-top: 8px;
+  color: #ffb3b3;
+}
+
 .video-wrapper {
   position: relative;
   width: 100%;
