@@ -19,7 +19,7 @@
     "ingredients": ["2 dl melk", "1 ss kakao", "1 ss sukker", "Krem på topp"],
     "steps": ["Varm melk forsiktig.", "Rør inn kakao og sukker.", "Hell i kopp og topp med krem."]
   },
-  "7": { "type": "code", "title": "Kjør kode", "starter": "console.log('Hei');" },
+  "7": { "type": "code", "title": "Kjør kode", "starter": "console.log('Denne uken blir god uke ;)) ');" },
   "8": {
     "type": "gift-wrap",
     "title": "Gavepakking",
